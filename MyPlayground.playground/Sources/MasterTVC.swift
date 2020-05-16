@@ -29,13 +29,14 @@ public class MasterTVC: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let text = tableView.cellForRow(at: indexPath)?.detailTextLabel?.text else { return }
+        guard let selectedRow = tableView.indexPathForSelectedRow?.row else {
+            return
+        }
         
-//        let selectedRow = self.reasonsProtocol[indexPath.row]
-//
-//        let detail = DetailVC()
-////        detail.message = text
-//        self.navigationController?.pushViewController(detail, animated: true)
+        let newVC = DetailVC()
+        newVC.reason = reasonsProtocol[selectedRow]
+        navigationController?.pushViewController(newVC, animated: true)
+        
     }
     
     override public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -44,7 +45,7 @@ public class MasterTVC: UITableViewController {
     
     func createReasonArray() {
         reasonsProtocol.append(Reason(reasonText: "They're pretty.", reasonImage: UIImage(named: "beauty.png")!, reasonDescription: "Let's go check some out!"))
-        reasonsProtocol.append(Reason(reasonText: "They're everywhere.", reasonImage: UIImage(named: "world.png")!, reasonDescription: "Do you have any idea of some? I'll show you."))
+        reasonsProtocol.append(Reason(reasonText: "They're everywhere.", reasonImage: UIImage(named: "world.png")!, reasonDescription: "Do you have any idea?"))
         reasonsProtocol.append(Reason(reasonText: "They're useful.", reasonImage: UIImage(named: "useful.png")!, reasonDescription: "We happen to use them all the time."))
         reasonsProtocol.append(Reason(reasonText: "I just do.", reasonImage: UIImage(named: "love.png")!, reasonDescription: "Do I need more reasons? Hahha"))
     }
